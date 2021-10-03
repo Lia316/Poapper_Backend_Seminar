@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Lia",
+        "job": "student",
+        "hobby" : {
+            "sport": "running",
+            "study": "node.js"
+        },
+        "age": "secret"
+    },
+    {
+        "name": "mock",
+        "job": "anonymous",
+        "hobby": {
+            "sport": "coding",
+            "study": "c"
+        },
+        "age": "2n"
+    }
+]
