@@ -1,3 +1,6 @@
+// problem2
+// 피보나치 수열 문제
+
 function fibo(n){
     let f0 = 0, f1 = 1, result;
 
