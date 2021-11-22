@@ -1,0 +1,10 @@
+CREATE DATABASE poapper_backend;
+USE poapper_backend;
+
+CREATE TABLE foods(
+    id INT(11) NOT NULL AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    kcal INT(11) NOT NULL,
+    isVegan BOOL NULL,
+    PRIMARY KEY(id)
+);
