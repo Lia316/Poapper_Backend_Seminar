@@ -1,5 +1,5 @@
 const http = require('http')
-const mysql = require('mysql');
+const mysql = require('mysql')
 
 var db = mysql.createConnection({
     host: 'localhost',
@@ -29,7 +29,7 @@ const server = http.createServer((req, res) => {
                 res.end()
             })
         } 
-        else {
+        else if (queryID[1] != 'favicon.ico') {
             db.query(`SELECT * FROM foods WHERE id=${queryID[1]}`, (error, result) => {
                 res.write(JSON.stringify(result))
                 if(error) throw error
