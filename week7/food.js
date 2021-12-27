@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    if (req.cookies.id != '') {
+    if (req.signedCookies.id != '') {
         const id = req.params.id
         db.query(`DELETE FROM foods WHERE id=${id}`, (error, result) => {
             if (error) throw error
@@ -52,7 +52,7 @@ router.delete('/:id', (req, res) => {
 router.post('/', (req, res) => {
     const body = req.body
     console.log('💝', body)
-    if (req.cookies.id != '') {
+    if (req.signedCookies.id != '') {
         db.query(`INSERT INTO foods (name, kcal, isVegan) VALUES ('${body.name}', '${body.kcal}', '${body.isVegan}')`, (error, result) => {
             if (error) throw error
             res.send(result)
@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    if (req.cookies.id != '') {
+    if (req.signedCookies.id != '') {
         const id = req.params.id
         const body = req.body
 

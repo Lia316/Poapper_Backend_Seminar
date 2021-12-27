@@ -14,15 +14,15 @@ var db = mysql.createConnection({
 var cookie_id, cookie_pw;
 
 const app = express()
-app.use(cookieParser())
+app.use(cookieParser("asdf"))
 app.use(express.json())
 app.use(express.urlencoded())
 app.use("/food", foodRouter)
 
-const cookieConfig = { httpOnly: true, maxAge: 10000, signed: true }
+const cookieConfig = { httpOnly: true, signed: true }
 
 app.get('/', (req, res) => {
-  console.log(req.cookies)
+  console.log(req.signedCookies)
   res.sendFile(__dirname + "/view/index.html")
 })
 
@@ -58,8 +58,8 @@ app.post('/login', (req, res) => {
 
     if (id == cookie_id && pw == cookie_pw) {
       console.log("Login success")
-      res.cookie('id', cookie_id)//, cookieConfig)
-      res.cookie('password', cookie_pw)//, cookieConfig)
+      res.cookie('id', cookie_id, cookieConfig)
+      res.cookie('password', cookie_pw, cookieConfig)
       res.sendFile(__dirname + "/view/secret_file.html")
     } 
     else {
