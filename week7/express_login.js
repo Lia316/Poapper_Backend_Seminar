@@ -2,6 +2,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const mysql = require('mysql')
 const { NULL } = require('mysql/lib/protocol/constants/types')
+const foodRouter = require(__dirname + '/food.js')
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -10,10 +11,13 @@ var db = mysql.createConnection({
   database: 'poapper_backend'
 })
 
+var cookie_id, cookie_pw;
+
 const app = express()
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded())
+app.use("/food", foodRouter)
 
 const cookieConfig = { httpOnly: true, maxAge: 10000, signed: true }
 
@@ -41,7 +45,6 @@ app.post('/login', (req, res) => {
   const body = req.body
   const id = body.id
   const pw = body.password
-  var cookie_id =''; var cookie_pw='';
 
   db.query(`SELECT * FROM user WHERE login_id='${id}' AND login_pw='${pw}'`, (error, result) => {
     if (error) throw error
@@ -58,8 +61,11 @@ app.post('/login', (req, res) => {
       res.cookie('id', cookie_id)//, cookieConfig)
       res.cookie('password', cookie_pw)//, cookieConfig)
       res.sendFile(__dirname + "/view/secret_file.html")
-    } else {
+    } 
+    else {
       console.log("Login failed...")
+      res.cookie('id', '')
+      res.cookie('password', '')
       res.redirect(301, "/")
     }
   })
