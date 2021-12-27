@@ -12,6 +12,7 @@ var db = mysql.createConnection({
 })
 
 var cookie_id, cookie_pw;
+var user;
 
 const app = express()
 app.use(cookieParser("asdf"))
@@ -58,17 +59,29 @@ app.post('/login', (req, res) => {
 
     if (id == cookie_id && pw == cookie_pw) {
       console.log("Login success")
+      user = result[0]
       res.cookie('id', cookie_id, cookieConfig)
       res.cookie('password', cookie_pw, cookieConfig)
       res.sendFile(__dirname + "/view/secret_file.html")
     } 
     else {
       console.log("Login failed...")
+      user = undefined
       res.cookie('id', '')
       res.cookie('password', '')
       res.redirect(301, "/")
     }
   })
+})
+
+app.post('/withdraw', (req, res) => {
+  if (user != undefined) {
+    const id = user.id
+    db.query(`DELETE FROM user WHERE id=${id}`, (error, result) => {
+      if (error) throw error
+    })
+  }
+  res.redirect(301, "/")
 })
 
 app.listen(8080, () => console.log("Server is listening on 8080 port..."))
