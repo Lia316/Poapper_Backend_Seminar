@@ -47,11 +47,10 @@ app.post('/login', (req, res) => {
     if (error) throw error
     console.log(result)
     
-    if (result[0] != NULL) {
+    if (result.length) {
       cookie_id = result[0].login_id
       cookie_pw = result[0].login_pw
     }
-
     console.log(id, pw, cookie_id, cookie_pw)
 
     if (id == cookie_id && pw == cookie_pw) {
