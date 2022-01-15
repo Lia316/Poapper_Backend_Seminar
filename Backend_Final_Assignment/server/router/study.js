@@ -17,4 +17,16 @@ router.get('/', (req, res) => {
     })
 })
 
+router.post('/', (req, res) => {
+    const body = req.body
+    const q_word = body.word
+    const q_mean = body.mean
+    const q_level = body.level
+
+    db.query(`INSERT INTO cards (word, mean, level) VALUES ('${q_word}', '${q_mean}', '${q_level}')`, (error, result) => {
+        if (error) throw error
+    })
+    res.end()
+})
+
 module.exports = router
