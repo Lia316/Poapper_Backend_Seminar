@@ -5,7 +5,7 @@ class CreateCard extends Component {
         return (
             <article>
                 <h2>Create</h2>
-                <form action="/card" method="post"
+                <form action="/study" method="post"
                     onSubmit={function (e) {
                         e.preventDefault()
                         this.props.onSubmit(

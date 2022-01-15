@@ -10,7 +10,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      subject: { title: '기억상자', sub: '라이트너 암기법을 활용한 단어 학습 웹페이지' },
+      subject: { title: '기억상자', sub: '라이트너 암기법을 활용한 단어 학습 웹페이지' }
     }
   }
 
@@ -31,7 +31,7 @@ class App extends Component {
           .then((res) => console.log(res.status))
 
           this.setState({
-            sub: 'created!'
+            subject: { title: '기억상자', sub: 'created!'}
           })
         }.bind(this)}>
         </CreateCard>
