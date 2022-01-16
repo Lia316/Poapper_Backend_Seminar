@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-class Subject extends Component {
+class Title extends Component {
     render() {
         return (
             <header>
-                <h1><a href="/" onClick={function (e) {
+                <h1><a href="/" onClick = { function (e) {
                     e.preventDefault();
                     this.props.onChangePage();
                 }
@@ -17,4 +17,4 @@ class Subject extends Component {
     }
 }
 
-export default Subject;
+export default Title;

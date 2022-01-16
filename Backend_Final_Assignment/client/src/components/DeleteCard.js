@@ -3,23 +3,22 @@ import Subtitle from "./Subtitle"
 
 class CreateCard extends Component {
     constructor(props) {
-        super(props);
+        super(props)
 
-        this.state = {
-            subtitle: { title: 'Create', sub: '새 카드를 생성해보세요!'
-            }
+        this.state = { 
+            subtitle: { title: 'Delete', sub: '카드를 선택하고 삭제할 수 있습니다.' }
         }
     }
 
     render() {
         return (
             <article>
-                <Subtitle 
-                    title={this.state.subtitle.title} 
+                <Subtitle
+                    title={this.state.subtitle.title}
                     sub={this.state.subtitle.sub}>
                 </Subtitle>
-                
-                <form action = "/study" method = "post"
+
+                <form action = "/study" method = "delete"
                     onSubmit = { function (e) {
                         e.preventDefault()
                         this.props.onSubmit(
@@ -27,9 +26,6 @@ class CreateCard extends Component {
                             e.target.mean.value
                         )
                         }.bind(this)}>
-                    <p><input type="text" name="word" placeholder="word"></input></p>
-                    <p><input type="text" name="mean" placeholder="mean"></input></p>
-                    <p><input type="submit"></input></p>
                 </form>
             </article>
         )
