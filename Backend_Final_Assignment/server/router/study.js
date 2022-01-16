@@ -29,4 +29,12 @@ router.post('/', (req, res) => {
     res.end()
 })
 
+router.delete('/:id', (req, res) => {
+    const id = req.params.id
+    db.query(`DELETE FROM cards WHERE id=${id}`, (error, result) => {
+        if (error) throw error
+    })
+    res.end()
+})
+
 module.exports = router
