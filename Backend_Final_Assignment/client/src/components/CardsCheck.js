@@ -4,11 +4,10 @@ class CardsCheck extends Component {
     getCheckedId() {
         for (var i = 1; i <= this.props.cards.length; i++) {
             var card = document.getElementsByName("card")[i]
-            if (card.checked == true) {
+            if (card.checked === true) {
                 return card.id
             }
         }
-        // console.log("💦", $("select[name=card]").val())
     }
     
     render() {
