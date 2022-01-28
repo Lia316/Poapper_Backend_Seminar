@@ -5,10 +5,8 @@ import CardsCheck from "./CardsCheck"
 
 class CreateCard extends Component {
     async getData() {
-        console.log("💗")
         try {
             await axios.get('/study')
-            console.log("💗")
                 .then((res) => {
                     return res.data
                 })
