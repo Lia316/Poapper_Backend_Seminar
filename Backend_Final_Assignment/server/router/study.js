@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const mysql = require('mysql')
-require("dotenv").config();
+require("dotenv").config({ path: __dirname + '/.env'})
 
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
