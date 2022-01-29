@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class TOC extends Component{
     render(){     
@@ -8,14 +9,7 @@ class TOC extends Component{
       for(var i = 0; i < data.length; i++){
         lists.push(
           <li key = { data[i].id }>
-            <a href={"/content/"+data[i].id}
-              data-id={data[i].id}
-              onClick={function(e){
-                e.preventDefault()
-                this.props.onChangePage(e.target.dataset.id)
-              }
-              .bind(this)}>
-            {data[i].title}</a>
+            <Link to = {'/' + data[i].mode}>{data[i].title}</Link>
           </li>);
       }
       return (

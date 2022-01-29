@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Title extends Component {
     render() {
         return (
             <header>
-                <h1><a href="/" onClick = { function (e) {
-                    e.preventDefault();
-                    this.props.onChangePage();
-                }
-                .bind(this)}>
-                {this.props.title}</a></h1>
-                
+                <h1><Link to = '/'> {this.props.title} </Link></h1>
                 {this.props.sub}
             </header>
         );
