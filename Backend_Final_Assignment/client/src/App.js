@@ -7,7 +7,7 @@ import Subtitle from "./components/Subtitle"
 import TOC from './components/TOC'
 import CreateCard from "./components/CreateCard.js"
 import DeleteCard from "./components/DeleteCard.js"
-
+import SelectLevel from "./components/SelectLevel.js"
 
 class App extends Component {
 
@@ -60,7 +60,9 @@ class App extends Component {
         <Route path = '/delete'>
           <DeleteCard></DeleteCard>
         </Route>
-        
+        <Route path='/study'>
+          <SelectLevel></SelectLevel>
+        </Route>
       </div>
     )
   }

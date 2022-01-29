@@ -17,6 +17,15 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+    
+    db.query(`SELECT * FROM cards WHERE level=${id}`, (error, result) => {
+        if (error) throw error
+        res.send(result)
+    })
+})
+
 router.post('/', (req, res) => {
     const body = req.body
     const q_word = body.word

@@ -3,7 +3,7 @@ import axios from "axios"
 import Subtitle from "./Subtitle"
 import CardsCheck from "./CardsCheck"
 
-class CreateCard extends Component {
+class DeleteCard extends Component {
     async getData() {
         try {
             await axios.get('/study')
@@ -55,4 +55,4 @@ class CreateCard extends Component {
     }
 }
 
-export default CreateCard
+export default DeleteCard
