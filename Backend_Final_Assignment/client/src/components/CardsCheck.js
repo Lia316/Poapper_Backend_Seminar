@@ -9,7 +9,15 @@ class CardsCheck extends Component {
             }
         }
     }
-    
+
+    submitForm(e) {
+        e.preventDefault()
+        window.location.reload()
+        this.props.onSubmit(
+            this.getCheckedId()
+        )
+    } 
+
     render() {
         var cards = this.props.cards
         var lists = []
@@ -17,7 +25,7 @@ class CardsCheck extends Component {
         for (var i = 0; i < cards.length; i++) {
             lists.push(
                 <label key={cards[i].id}>
-                    <input type = "radio" name="card" id = {cards[i].id}></input>
+                    <input type = "radio" name = "card" id = {cards[i].id}></input>
                     {cards[i].word}
                 </label>)
         }
@@ -28,14 +36,9 @@ class CardsCheck extends Component {
                     {lists}
                 </ul>           
                 
-                <form action = "/study" method = "delete"
-                    onSubmit = { function (e) {
-                        // e.preventDefault()
-                        this.props.onSubmit(
-                            this.getCheckedId()
-                        )
-                        }.bind(this)}>
-                    <input type="hidden" name="id" value="1"></input> 
+                <form action = "/study" 
+                    method = "delete"
+                    onSubmit = { this.submitForm.bind(this) }>
                     <p><input type="submit" value="삭제"></input></p>
                 </form>
             </article>
