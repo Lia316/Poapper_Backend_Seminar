@@ -30,7 +30,7 @@ class CardsCheck extends Component {
                 
                 <form action = "/study" method = "delete"
                     onSubmit = { function (e) {
-                        e.preventDefault()
+                        // e.preventDefault()
                         this.props.onSubmit(
                             this.getCheckedId()
                         )
