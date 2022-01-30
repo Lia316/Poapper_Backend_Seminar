@@ -38,7 +38,7 @@ class SelectLevel extends Component {
         var cards = this.state.cards[id]
         var level = []
         for (var i = 0; i < cards.length; i++) {
-            level.push(<li key={i}>{cards[i].word} : {cards[i].mean}</li>)
+            level.push(<li key={i} class="list">{cards[i].word} : {cards[i].mean}</li>)
         }
         return level
     }
