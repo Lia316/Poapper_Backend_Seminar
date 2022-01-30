@@ -22,6 +22,7 @@ class CreateCard extends Component {
                 <form action = "/study" method = "post"
                     onSubmit = { function (e) {
                         e.preventDefault()
+                        alert(`단어: ${e.target.word.value} \n의미: ${e.target.mean.value} \n\n생성 완료!`)
                         this.props.onSubmit(
                             e.target.word.value,
                             e.target.mean.value
