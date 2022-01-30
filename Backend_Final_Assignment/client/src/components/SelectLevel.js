@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from "axios"
 import './style.css'
 
@@ -8,13 +9,6 @@ class SelectLevel extends Component {
         super(props)
 
         this.state = {
-            level: [
-                { count: 1, sub: '권장 용량은 10칸입니다' },
-                { count: 2, sub: '권장 용량은 20칸입니다' },
-                { count: 3, sub: '권장 용량은 30칸입니다' },
-                { count: 4, sub: '권장 용량은 40칸입니다' },
-                { count: 5, sub: '권장 용량은 50칸입니다' }
-            ],
             cards: [],
             colors: ["blue", "green", "yellow", "cyan", "purple"]
         }
@@ -56,7 +50,7 @@ class SelectLevel extends Component {
         for (var i = 0; i < cards.length; i++) {
             levels.push(
                 <div>
-                    <a href="#" class={"btn-3d "+this.state.colors[i]}>level {i+1}</a>
+                    <Link to={'/study/level/'+(i+1)} class={"btn-3d "+this.state.colors[i]}>level {i+1}</Link>
                     <ol class="wordList">{this.getLevelCards(i)}</ol>
                 </div>)
         }

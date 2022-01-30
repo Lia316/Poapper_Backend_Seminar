@@ -8,6 +8,7 @@ import TOC from './components/TOC'
 import CreateCard from "./components/CreateCard.js"
 import DeleteCard from "./components/DeleteCard.js"
 import SelectLevel from "./components/SelectLevel.js"
+import StudyLevel from "./components/StudyLevel.js"
 
 class App extends Component {
 
@@ -60,8 +61,11 @@ class App extends Component {
         <Route path = '/delete'>
           <DeleteCard></DeleteCard>
         </Route>
-        <Route path='/study'>
+        <Route exact path='/study'>
           <SelectLevel></SelectLevel>
+        </Route>
+        <Route path='/study/level/:id'>
+          <StudyLevel></StudyLevel>
         </Route>
       </div>
     )
