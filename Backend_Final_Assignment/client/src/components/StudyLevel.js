@@ -16,16 +16,16 @@ class StudyLevel extends Component {
                 { title: '4단계', sub: '권장 카드 수는 40장입니다' },
                 { title: '5단계', sub: '권장 카드 수는 50장입니다' },
         ],
-            id: 0,
+            level: 0,
             openCard: "시작!",
             cardIndex: 0,
             cards: []
         }
     }
 
-    async getData(id) {
+    async getData(level) {
         try {
-            await axios.get(`/study/level/${id}`)
+            await axios.get(`/study/level/${level}`)
                 .then((res) => {
                     this.setState({ cards: res.data })
                 })
@@ -35,9 +35,9 @@ class StudyLevel extends Component {
     }
 
     componentDidMount() {
-        const id = this.props.match.params.id
-        this.setState({ id: id })
-        this.getData(id)
+        const level = this.props.match.params.id
+        this.setState({ level: level })
+        this.getData(level)
     }
 
     changeBtnName(e) {
@@ -47,11 +47,18 @@ class StudyLevel extends Component {
         this.setState({ openCard: this.state.openCard === card.word ? card.mean : card.word })
     }
 
-    decNum(e) {
+    success(e) {
         e.preventDefault()
         let index = this.state.cardIndex
         let cardNum = this.state.cards.length - 1
+        let currentLevel = this.state.level
 
+        if (currentLevel < 5 && index <= cardNum) {
+            this.props.onSubmit(
+                this.state.cards[index].id,
+                Number(currentLevel) + 1
+            )
+        }
         if (index < cardNum) {
             index += 1
             this.setState({ cardIndex: index})
@@ -61,8 +68,29 @@ class StudyLevel extends Component {
         }
     }
 
+    fail(e) {
+        e.preventDefault()
+        let index = this.state.cardIndex
+        let cardNum = this.state.cards.length - 1
+        let currentLevel = this.state.level
+
+        if(currentLevel > 1 && index <= cardNum) {
+            this.props.onSubmit(
+                this.state.cards[index].id,
+                Number(currentLevel) - 1
+            )
+        }
+        if (index < cardNum) {
+            index += 1
+            this.setState({ cardIndex: index })
+            this.setState({ openCard: this.state.cards[index].word })
+        } else {
+            alert("학습을 완료하셨습니다")
+        }
+    }
+
     render() {
-        const id = this.state.id
+        const id = this.state.level
         console.log(id)
         return (
             <article>
@@ -71,13 +99,19 @@ class StudyLevel extends Component {
                     sub={this.state.subtitle[id].sub}>
                 </Subtitle>
 
-                <form onSubmit = {this.changeBtnName.bind(this)}>
+                <form onSubmit={this.changeBtnName.bind(this)}>
                     <button type="submit" class='openCardButton'>{this.state.openCard}</button>
                 </form>
-                <form onSubmit={this.decNum.bind(this)} class='submitButton'>
+                <form action={"/study/level/"} 
+                    method="post" 
+                    onSubmit={this.fail.bind(this)} 
+                    class='submitButton'>
                     <button type="submit" id='check' class="btn cyan small">다시</button>
                 </form>
-                <form onSubmit={this.decNum.bind(this)} class='submitButton'>
+                <form action={"/study/level/"} 
+                    method="post" 
+                    onSubmit={this.success.bind(this)} 
+                    class='submitButton'>
                     <button type="submit" id='reset' class="btn green small">확인</button>
                 </form>
             </article>

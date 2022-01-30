@@ -65,7 +65,13 @@ class App extends Component {
           <SelectLevel></SelectLevel>
         </Route>
         <Route path='/study/level/:id'>
-          <StudyLevel></StudyLevel>
+          <StudyLevel onSubmit={function (id, nextLv) {
+            axios.post("/study/level", {
+              id: id,
+              nextLv: nextLv
+            })
+              .then((res) => console.log(res.status))
+          }}></StudyLevel>
         </Route>
       </div>
     )

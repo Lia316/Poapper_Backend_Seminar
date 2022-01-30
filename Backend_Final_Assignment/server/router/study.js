@@ -47,6 +47,17 @@ router.post('/', (req, res) => {
     res.end()
 })
 
+router.post('/level', (req, res) => {
+    const body = req.body
+    const q_id = body.id
+    const q_nextLv = body.nextLv
+
+    db.query(`UPDATE cards SET level='${q_nextLv}' WHERE id='${q_id}'`, (error, result) => {
+        if (error) throw error
+    })
+    res.end()
+})
+
 router.delete('/:id', (req, res) => {
     const id = req.params.id
     db.query(`DELETE FROM cards WHERE id=${id}`, (error, result) => {
