@@ -15,7 +15,8 @@ class SelectLevel extends Component {
                 { count: 4, sub: '권장 용량은 40칸입니다' },
                 { count: 5, sub: '권장 용량은 50칸입니다' }
             ],
-            cards: []
+            cards: [],
+            colors: ["blue", "green", "yellow", "cyan", "purple"]
         }
     }
 
@@ -41,31 +42,34 @@ class SelectLevel extends Component {
 
     getLevelCards(id) {
         var cards = this.state.cards[id]
-        var level = ''
+        var level = []
         for (var i = 0; i < cards.length; i++) {
-            level += `${cards[i].word} : ${cards[i].mean}\n`
+            level.push(<li key={i}>{cards[i].word} : {cards[i].mean}</li>)
         }
         return level
     }
 
     render() {
-        console.log('🔥', this.state.cards)
         var cards = this.state.cards
         var levels = []
 
         for (var i = 0; i < cards.length; i++) {
             levels.push(
-                <button key={i} type="button" class="levelblock">{this.getLevelCards(i)}</button>)
-                // <label key={cards[i].id}>
-                //     <input type="radio" name="card" id={cards[i].id}></input>
-                //     {cards[i].word}
-                // </label>)
+                <div>
+                    <a href="#" class={"btn-3d "+this.state.colors[i]}>level {i+1}</a>
+                    <ol class="wordList">{this.getLevelCards(i)}</ol>
+                </div>)
         }
 
         return (
-            <article>
-                {levels}
-            </article>
+            <div>
+                <desc>
+                    <h3>학습할 단계를 선택하세요</h3>
+                </desc>
+                <article class="levelSelection">
+                    {levels}
+                </article>
+            </div>
         )
     }
 }
